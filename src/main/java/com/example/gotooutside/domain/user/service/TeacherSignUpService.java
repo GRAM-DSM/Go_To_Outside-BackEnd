@@ -20,12 +20,16 @@ public class TeacherSignUpService {
     private final PasswordEncoder passwordEncoder;
 
     @Value("${teacher.code}")
-    private final String code;
+    private String code;
 
     @Transactional
     public void execute(TeacherSignUpRequest request) {
 
         String classroom = request.getGrade() + request.getGroup() + "00";
+
+        if (userRepository.existsByAccountId(request.getAccountId())) {
+            throw UserAlreadyExistsException.EXCEPTION;
+        }
 
         if (userRepository.existsByNumber(classroom)) {
             throw UserAlreadyExistsException.EXCEPTION;
