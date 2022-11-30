@@ -9,15 +9,15 @@ import java.util.Base64;
 @ConfigurationProperties(prefix = "jwt")
 public class JwtProperties {
 
-    private final String secret;
+    private final String secretKey;
     private final String header;
     private final String prefix;
     private final Long accessExp;
     private final Long refreshExp;
 
-    public JwtProperties(String secret, String header, String prefix
+    public JwtProperties(String secretKey, String header, String prefix
             , Long accessExp, Long refreshExp) {
-        this.secret = Base64.getEncoder().encodeToString(secret.getBytes());
+        this.secretKey = Base64.getEncoder().encodeToString(secretKey.getBytes());
         this.header = header;
         this.prefix = prefix;
         this.accessExp = accessExp*1000;
