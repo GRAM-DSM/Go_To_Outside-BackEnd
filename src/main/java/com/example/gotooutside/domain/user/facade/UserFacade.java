@@ -15,6 +15,10 @@ public class UserFacade {
 
     public User getCurrentUser() {
         String accountId = SecurityContextHolder.getContext().getAuthentication().getName();
+        return getUserByAccountId(accountId);
+    }
+
+    public User getUserByAccountId(String accountId) {
         return userRepository.findByAccountId(accountId)
                 .orElseThrow(() -> UserNotFoundException.EXCEPTION);
     }
