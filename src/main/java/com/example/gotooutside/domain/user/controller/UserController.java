@@ -4,12 +4,10 @@ import com.example.gotooutside.domain.user.controller.dto.request.StudentSignUpR
 import com.example.gotooutside.domain.user.controller.dto.request.TeacherSignUpRequest;
 import com.example.gotooutside.domain.user.service.StudentSignUpService;
 import com.example.gotooutside.domain.user.service.TeacherSignUpService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RequiredArgsConstructor
 @RequestMapping("/user")
@@ -21,13 +19,13 @@ public class UserController {
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping("/student/signup")
-    public void studentSignUp(StudentSignUpRequest request) {
+    public void studentSignUp(@RequestBody @Valid StudentSignUpRequest request) {
         studentSignUpService.execute(request);
     }
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping("/teacher/signup")
-    public void teacherSigUp(TeacherSignUpRequest request) {
+    public void teacherSigUp(@RequestBody @Valid TeacherSignUpRequest request) {
         teacherSignUpService.execute(request);
     }
 }
