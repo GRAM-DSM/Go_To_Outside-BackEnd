@@ -26,3 +26,6 @@ jwt:
   secret-key: ${JWT_SECRET}
   access-exp: ${ACCESS_EXP}
   refresh-exp: ${REFRESH_EXP}
+
+teacher.code:
+  ${TEACHER_CODE}
