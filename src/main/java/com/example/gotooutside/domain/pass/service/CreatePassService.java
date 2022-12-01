@@ -6,10 +6,10 @@ import com.example.gotooutside.domain.pass.domain.repository.PassRepository;
 import com.example.gotooutside.domain.pass.exception.PassAlreadyExistsException;
 import com.example.gotooutside.domain.user.domain.User;
 import com.example.gotooutside.domain.user.facade.UserFacade;
-import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.time.LocalDateTime;
 
 @RequiredArgsConstructor

@@ -4,10 +4,11 @@ import com.example.gotooutside.domain.user.controller.dto.request.StudentSignUpR
 import com.example.gotooutside.domain.user.controller.dto.request.TeacherSignUpRequest;
 import com.example.gotooutside.domain.user.service.StudentSignUpService;
 import com.example.gotooutside.domain.user.service.TeacherSignUpService;
-import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
 
 @RequiredArgsConstructor
 @RequestMapping("/user")

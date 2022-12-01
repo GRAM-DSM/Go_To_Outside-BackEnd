@@ -6,11 +6,12 @@ import com.example.gotooutside.domain.user.domain.repository.UserRepository;
 import com.example.gotooutside.domain.user.exception.InvalidCodeException;
 import com.example.gotooutside.domain.user.exception.UserAlreadyExistsException;
 import com.example.gotooutside.global.enums.Authority;
-import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import javax.transaction.Transactional;
 
 @RequiredArgsConstructor
 @Service
