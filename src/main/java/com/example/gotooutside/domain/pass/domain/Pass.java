@@ -1,18 +1,21 @@
 package com.example.gotooutside.domain.pass.domain;
 
 import com.example.gotooutside.domain.user.domain.User;
-import jakarta.persistence.*;
+import com.example.gotooutside.global.entity.BaseTimeEntity;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import javax.persistence.*;
+
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity
-public class Pass {
+public class Pass extends BaseTimeEntity {
 
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "pass")
     private Long id;
 
@@ -29,15 +32,25 @@ public class Pass {
     @Column(length = 5, nullable = false)
     private String incomingTime;
 
+    @Column(length = 15)
+    private String permitter;
+
     @Column(nullable = false)
     private boolean permitStatus;
 
     @Builder
-    public Pass(User user, String reason, String outingTime, String incomingTime, boolean permitStatus) {
+    public Pass(User user, String reason, String outingTime, String incomingTime, String permitter, boolean permitStatus) {
         this.user = user;
         this.reason = reason;
         this.outingTime = outingTime;
         this.incomingTime = incomingTime;
+        this.permitter = permitter;
+        this.permitStatus = permitStatus;
+    }
+
+    public void permit(String incomingTime, String permitter, boolean permitStatus) {
+        this.incomingTime = incomingTime;
+        this.permitter = permitter;
         this.permitStatus = permitStatus;
     }
 }
