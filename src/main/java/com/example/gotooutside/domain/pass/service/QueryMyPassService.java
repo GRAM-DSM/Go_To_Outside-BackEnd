@@ -1,32 +1,33 @@
 package com.example.gotooutside.domain.pass.service;
 
 import com.example.gotooutside.domain.pass.controller.dto.response.PassDetailsResponse;
-import com.example.gotooutside.domain.pass.controller.dto.response.PassResponse;
 import com.example.gotooutside.domain.pass.domain.Pass;
 import com.example.gotooutside.domain.pass.facade.PassFacade;
+import com.example.gotooutside.domain.user.domain.User;
+import com.example.gotooutside.domain.user.facade.UserFacade;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @RequiredArgsConstructor
 @Service
-public class QueryPassDetailsService {
+public class QueryMyPassService {
 
+    private final UserFacade userFacade;
     private final PassFacade passFacade;
 
     @Transactional(readOnly = true)
-    public PassDetailsResponse execute(Long id) {
+    public PassDetailsResponse execute() {
 
-        Pass pass = passFacade.getPassById(id);
+        User user = userFacade.getCurrentUser();
+        Pass pass = passFacade.getPassByUser(user);
 
         return PassDetailsResponse.builder()
-                .name(pass.getUser().getName())
                 .number(pass.getUser().getNumber())
-                .permitStatus(pass.getPermitStatus().toString())
+                .name(pass.getUser().getName())
+                .reason(pass.getReason())
                 .outingTime(pass.getOutingTime())
                 .incomingTime(pass.getIncomingTime())
-                .reason(pass.getReason())
                 .permitter(pass.getPermitter())
                 .build();
     }

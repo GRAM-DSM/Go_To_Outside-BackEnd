@@ -11,14 +11,14 @@ public class PassResponse {
     private Long passId;
     private String name;
     private String number;
-    private boolean permitStatus;
+    private String permitStatus;
 
     public static PassResponse of(Pass pass) {
         return PassResponse.builder()
                 .passId(pass.getId())
                 .name(pass.getUser().getName())
                 .number(pass.getUser().getNumber())
-                .permitStatus(pass.isPermitStatus())
+                .permitStatus(pass.getPermitStatus().toString())
                 .build();
 
     }

@@ -1,5 +1,6 @@
 package com.example.gotooutside.domain.pass.domain;
 
+import com.example.gotooutside.domain.pass.domain.types.PermitStatus;
 import com.example.gotooutside.domain.user.domain.User;
 import com.example.gotooutside.global.entity.BaseTimeEntity;
 import lombok.AccessLevel;
@@ -35,11 +36,12 @@ public class Pass extends BaseTimeEntity {
     @Column(length = 15)
     private String permitter;
 
+    @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private boolean permitStatus;
+    private PermitStatus permitStatus;
 
     @Builder
-    public Pass(User user, String reason, String outingTime, String incomingTime, String permitter, boolean permitStatus) {
+    public Pass(User user, String reason, String outingTime, String incomingTime, String permitter, PermitStatus permitStatus) {
         this.user = user;
         this.reason = reason;
         this.outingTime = outingTime;
@@ -48,9 +50,13 @@ public class Pass extends BaseTimeEntity {
         this.permitStatus = permitStatus;
     }
 
-    public void permit(String incomingTime, String permitter, boolean permitStatus) {
+    public void permit(String incomingTime, String permitter) {
         this.incomingTime = incomingTime;
         this.permitter = permitter;
-        this.permitStatus = permitStatus;
+        this.permitStatus = PermitStatus.PERMIT;
+    }
+
+    public void unPermit() {
+        this.permitStatus = PermitStatus.UNPERMIT;
     }
 }

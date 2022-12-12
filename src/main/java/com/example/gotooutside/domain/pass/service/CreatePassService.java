@@ -3,6 +3,7 @@ package com.example.gotooutside.domain.pass.service;
 import com.example.gotooutside.domain.pass.controller.dto.request.CreatePassRequest;
 import com.example.gotooutside.domain.pass.domain.Pass;
 import com.example.gotooutside.domain.pass.domain.repository.PassRepository;
+import com.example.gotooutside.domain.pass.domain.types.PermitStatus;
 import com.example.gotooutside.domain.pass.exception.PassAlreadyExistsException;
 import com.example.gotooutside.domain.user.domain.User;
 import com.example.gotooutside.domain.user.facade.UserFacade;
@@ -33,7 +34,7 @@ public class CreatePassService {
                 .reason(request.getReason())
                 .outingTime(request.getOutingTime())
                 .incomingTime("HH:MM")
-                .permitStatus(false)
+                .permitStatus(PermitStatus.WAITING)
                 .build());
     }
 }
