@@ -23,7 +23,7 @@ public class QueryPassListService {
         List<PassResponse> passList = passRepository.findAllByOrderByCreatedAtDesc()
                 .stream()
                 .map(PassResponse::of)
-                .toList();
+                .collect(Collectors.toList());
 
         return new PassListResponse(passList);
     }
