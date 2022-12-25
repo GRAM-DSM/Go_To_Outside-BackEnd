@@ -38,7 +38,7 @@ public class SecurityConfig {
 
                 //USER
                 .antMatchers(HttpMethod.POST, "/user/**").permitAll()
-                .antMatchers(HttpMethod.POST, "auth/login").permitAll()
+                .antMatchers(HttpMethod.POST, "/auth/login").permitAll()
 
                 //Pass
                 .antMatchers(HttpMethod.GET, "pass/**").hasAnyAuthority()
