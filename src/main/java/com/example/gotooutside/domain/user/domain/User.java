@@ -9,9 +9,11 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 
 @Getter
+@DiscriminatorColumn
+@Inheritance(strategy = InheritanceType.JOINED)
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity
-public class User {
+public abstract class User {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "user_id")
@@ -23,21 +25,21 @@ public class User {
     @Column(nullable = false)
     private String password;
 
-    @Column(length = 4, nullable = false, unique = true)
-    private String number;
-
     @Column(length = 7, nullable = false)
     private String name;
+
+    @Column(nullable = false, length = 11, unique = true)
+    private String phoneNumber;
 
     @Enumerated(EnumType.STRING)
     private Authority authority;
 
     @Builder
-    public User(String accountId, String password, String number, String name, Authority authority) {
+    public User(String accountId, String password, String name, String phoneNumber, Authority authority) {
         this.accountId = accountId;
         this.password = password;
-        this.number = number;
         this.name = name;
+        this.phoneNumber = phoneNumber;
         this.authority = authority;
     }
 }
