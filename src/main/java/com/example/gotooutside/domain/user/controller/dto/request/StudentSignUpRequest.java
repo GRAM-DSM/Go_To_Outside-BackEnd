@@ -22,7 +22,15 @@ public class StudentSignUpRequest {
     @Size(min = 4, max = 4, message = "학번은 4자 고정")
     private String number;
 
+    @NotBlank(message = "phoneNumber는 널 공백 포함 불가")
+    @Size(min = 10, max = 11, message = "전화번호는 10~11자")
+    private String phoneNumber;
+
     @NotBlank(message = "name는 공백 null 포함 불가")
     @Size(min = 2, max = 7, message = "이름은 2~7자")
     private String name;
+
+    @NotBlank(message = "guardianPhoneNumber는 널 공백 포함 불가")
+    @Size(min = 10, max = 11, message = "보호자 전화번호는 10~11자")
+    private String guardianPhoneNumber;
 }

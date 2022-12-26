@@ -18,6 +18,10 @@ public class TeacherSignUpRequest {
     @Size(min = 8, max = 20, message = "password는 8~20자 사이")
     private String password;
 
+    @NotBlank(message = "phoneNumber는 널 공백 포함 불가")
+    @Size(min = 10, max = 11, message = "전화번호는 10~11자")
+    private String phoneNumber;
+
     @NotBlank(message = "학년는 공백 null 포함 불가")
     @Size(min = 1, max = 1, message = "학년은 1자")
     private String grade;

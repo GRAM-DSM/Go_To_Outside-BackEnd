@@ -1,7 +1,9 @@
 package com.example.gotooutside.domain.user.service;
 
 import com.example.gotooutside.domain.user.controller.dto.request.TeacherSignUpRequest;
+import com.example.gotooutside.domain.user.domain.Teacher;
 import com.example.gotooutside.domain.user.domain.User;
+import com.example.gotooutside.domain.user.domain.repository.TeacherRepository;
 import com.example.gotooutside.domain.user.domain.repository.UserRepository;
 import com.example.gotooutside.domain.user.exception.InvalidCodeException;
 import com.example.gotooutside.domain.user.exception.UserAlreadyExistsException;
@@ -17,7 +19,7 @@ import javax.transaction.Transactional;
 @Service
 public class TeacherSignUpService {
 
-    private final UserRepository userRepository;
+    private final TeacherRepository teacherRepository;
     private final PasswordEncoder passwordEncoder;
 
     @Value("${teacher.code}")
@@ -26,13 +28,7 @@ public class TeacherSignUpService {
     @Transactional
     public void execute(TeacherSignUpRequest request) {
 
-        String classroom = request.getGrade() + request.getGroup() + "00";
-
-        if (userRepository.existsByAccountId(request.getAccountId())) {
-            throw UserAlreadyExistsException.EXCEPTION;
-        }
-
-        if (userRepository.existsByNumber(classroom)) {
+        if (teacherRepository.existsByAccountId(request.getAccountId())) {
             throw UserAlreadyExistsException.EXCEPTION;
         }
 
@@ -40,12 +36,13 @@ public class TeacherSignUpService {
             throw InvalidCodeException.EXCEPTION;
         }
 
-        userRepository.save(User.builder()
+        teacherRepository.save(Teacher.builder()
                 .accountId(request.getAccountId())
                 .password(passwordEncoder.encode(request.getPassword()))
-                .number(classroom)
                 .name(request.getName())
-                .authority(Authority.TEACHER)
+                .phoneNumber(request.getPhoneNumber())
+                .group(request.getGroup())
+                .grade(request.getGrade())
                 .build());
     }
 }
