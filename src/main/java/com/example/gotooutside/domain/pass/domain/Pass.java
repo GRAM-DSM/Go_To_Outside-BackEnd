@@ -1,6 +1,7 @@
 package com.example.gotooutside.domain.pass.domain;
 
 import com.example.gotooutside.domain.pass.domain.types.PermitStatus;
+import com.example.gotooutside.domain.user.domain.Student;
 import com.example.gotooutside.domain.user.domain.User;
 import com.example.gotooutside.global.entity.BaseTimeEntity;
 import lombok.AccessLevel;
@@ -21,8 +22,8 @@ public class Pass extends BaseTimeEntity {
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id")
-    private User user;
+    @JoinColumn(name = "student_id")
+    private Student student;
 
     @Column(length = 300, nullable = false)
     private String reason;
@@ -41,8 +42,8 @@ public class Pass extends BaseTimeEntity {
     private PermitStatus permitStatus;
 
     @Builder
-    public Pass(User user, String reason, String outingTime, String incomingTime, String permitter, PermitStatus permitStatus) {
-        this.user = user;
+    public Pass(Student student, String reason, String outingTime, String incomingTime, String permitter, PermitStatus permitStatus) {
+        this.student = student;
         this.reason = reason;
         this.outingTime = outingTime;
         this.incomingTime = incomingTime;
