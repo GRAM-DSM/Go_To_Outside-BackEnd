@@ -41,7 +41,7 @@ public class TeacherSignUpService {
                 .password(passwordEncoder.encode(request.getPassword()))
                 .name(request.getName())
                 .phoneNumber(request.getPhoneNumber())
-                .group(request.getGroup())
+                .classNumber(request.getGroup())
                 .grade(request.getGrade())
                 .build());
     }

@@ -17,12 +17,12 @@ public class Teacher extends User {
     @Column(length = 1, nullable = false)
     private String grade;
     @Column(length = 1, nullable = false)
-    private String group;
+    private String classNumber;
 
     @Builder
-    public Teacher(String accountId, String password, String name, String phoneNumber, String grade, String group) {
+    public Teacher(String accountId, String password, String name, String phoneNumber, String grade, String classNumber) {
         super(accountId, password, name, phoneNumber, Authority.TEACHER);
         this.grade = grade;
-        this.group = group;
+        this.classNumber = classNumber;
     }
 }
