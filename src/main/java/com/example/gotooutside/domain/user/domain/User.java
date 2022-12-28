@@ -34,7 +34,6 @@ public abstract class User {
     @Enumerated(EnumType.STRING)
     private Authority authority;
 
-    @Builder
     public User(String accountId, String password, String name, String phoneNumber, Authority authority) {
         this.accountId = accountId;
         this.password = password;

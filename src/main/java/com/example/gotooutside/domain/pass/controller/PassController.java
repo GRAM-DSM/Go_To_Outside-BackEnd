@@ -29,7 +29,7 @@ public class PassController {
         createPassService.execute(request);
     }
 
-    @GetMapping
+    @GetMapping("/list")
     public PassListResponse getList() {
         return queryPassListService.execute();
     }
@@ -51,7 +51,7 @@ public class PassController {
     }
 
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    @PatchMapping("/{pass-id}")
+    @DeleteMapping("/{pass-id}")
     public void unPermit(@PathVariable("pass-id") Long passId) {
         unPermitPassService.execute(passId);
     }

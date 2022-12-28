@@ -27,7 +27,7 @@ public class CreatePassService {
 
         Student student = studentFacade.getCurrentStudent();
 
-        if (passRepository.existsByUser(student)) {
+        if (passRepository.existsByStudent(student)) {
             throw PassAlreadyExistsException.EXCEPTION;
         }
 

@@ -3,6 +3,7 @@ package com.example.gotooutside.domain.pass.facade;
 import com.example.gotooutside.domain.pass.domain.Pass;
 import com.example.gotooutside.domain.pass.domain.repository.PassRepository;
 import com.example.gotooutside.domain.pass.exception.PassNotFoundException;
+import com.example.gotooutside.domain.user.domain.Student;
 import com.example.gotooutside.domain.user.domain.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -18,8 +19,8 @@ public class PassFacade {
                 .orElseThrow(() -> PassNotFoundException.EXCEPTION);
     }
 
-    public Pass getPassByUser(User user) {
-        return passRepository.findByUser(user)
+    public Pass getPassByStudent(Student student) {
+        return passRepository.findByStudent(student)
                 .orElseThrow(() -> PassNotFoundException.EXCEPTION);
     }
 }

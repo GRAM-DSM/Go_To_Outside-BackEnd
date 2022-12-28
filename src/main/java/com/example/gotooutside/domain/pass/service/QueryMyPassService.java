@@ -22,7 +22,7 @@ public class QueryMyPassService {
     public PassDetailsResponse execute() {
 
         Student student = studentFacade.getCurrentStudent();
-        Pass pass = passFacade.getPassByUser(student);
+        Pass pass = passFacade.getPassByStudent(student);
 
         return PassDetailsResponse.builder()
                 .number(pass.getStudent().getNumber())
