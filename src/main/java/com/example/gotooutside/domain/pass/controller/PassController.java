@@ -4,10 +4,7 @@ import com.example.gotooutside.domain.pass.controller.dto.request.CreatePassRequ
 import com.example.gotooutside.domain.pass.controller.dto.request.PermitPassRequest;
 import com.example.gotooutside.domain.pass.controller.dto.response.PassDetailsResponse;
 import com.example.gotooutside.domain.pass.controller.dto.response.PassListResponse;
-import com.example.gotooutside.domain.pass.service.CreatePassService;
-import com.example.gotooutside.domain.pass.service.PermitPassService;
-import com.example.gotooutside.domain.pass.service.QueryPassDetailsService;
-import com.example.gotooutside.domain.pass.service.QueryPassListService;
+import com.example.gotooutside.domain.pass.service.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -23,6 +20,8 @@ public class PassController {
     private final QueryPassListService queryPassListService;
     private final QueryPassDetailsService queryPassDetailsService;
     private final PermitPassService permitPassService;
+    private final QueryMyPassService queryMyPassService;
+    private final UnPermitPassService unPermitPassService;
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
@@ -45,4 +44,16 @@ public class PassController {
     public void permit(@PathVariable("pass-id") Long id, @RequestBody @Valid PermitPassRequest request) {
         permitPassService.execute(id, request);
     }
+
+    @GetMapping
+    public PassDetailsResponse getMyPass() {
+        return queryMyPassService.execute();
+    }
+
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @PatchMapping("/{pass-id}")
+    public void unPermit(@PathVariable("pass-id") Long passId) {
+        unPermitPassService.execute(passId);
+    }
+
 }
