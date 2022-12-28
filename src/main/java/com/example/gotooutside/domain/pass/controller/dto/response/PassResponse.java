@@ -16,8 +16,8 @@ public class PassResponse {
     public static PassResponse of(Pass pass) {
         return PassResponse.builder()
                 .passId(pass.getId())
-                .name(pass.getUser().getName())
-                .number(pass.getUser().getNumber())
+                .name(pass.getStudent().getName())
+                .number(pass.getStudent().getNumber())
                 .permitStatus(pass.getPermitStatus().toString())
                 .build();
 

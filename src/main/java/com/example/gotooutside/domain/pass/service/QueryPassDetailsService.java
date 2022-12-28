@@ -21,8 +21,8 @@ public class QueryPassDetailsService {
         Pass pass = passFacade.getPassById(id);
 
         return PassDetailsResponse.builder()
-                .name(pass.getUser().getName())
-                .number(pass.getUser().getNumber())
+                .name(pass.getStudent().getName())
+                .number(pass.getStudent().getNumber())
                 .permitStatus(pass.getPermitStatus().toString())
                 .outingTime(pass.getOutingTime())
                 .incomingTime(pass.getIncomingTime())

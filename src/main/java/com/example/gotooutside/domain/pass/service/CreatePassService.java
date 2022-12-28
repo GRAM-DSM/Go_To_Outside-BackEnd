@@ -5,7 +5,9 @@ import com.example.gotooutside.domain.pass.domain.Pass;
 import com.example.gotooutside.domain.pass.domain.repository.PassRepository;
 import com.example.gotooutside.domain.pass.domain.types.PermitStatus;
 import com.example.gotooutside.domain.pass.exception.PassAlreadyExistsException;
+import com.example.gotooutside.domain.user.domain.Student;
 import com.example.gotooutside.domain.user.domain.User;
+import com.example.gotooutside.domain.user.facade.StudentFacade;
 import com.example.gotooutside.domain.user.facade.UserFacade;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -18,19 +20,19 @@ import java.time.LocalDateTime;
 public class CreatePassService {
 
     private final PassRepository passRepository;
-    private final UserFacade userFacade;
+    private final StudentFacade studentFacade;
 
     @Transactional
     public void execute(CreatePassRequest request) {
 
-        User user = userFacade.getCurrentUser();
+        Student student = studentFacade.getCurrentStudent();
 
-        if (passRepository.existsByUser(user)) {
+        if (passRepository.existsByUser(student)) {
             throw PassAlreadyExistsException.EXCEPTION;
         }
 
         passRepository.save(Pass.builder()
-                .user(user)
+                .student(student)
                 .reason(request.getReason())
                 .outingTime(request.getOutingTime())
                 .incomingTime("HH:MM")
